@@ -15,17 +15,17 @@
     <meta property="og:title" content="Advancing Information and Telecommunication Workshop 2026" />
     <meta property="og:description" content="A collaborative workshop between IEICE (Japan) and IES (Indonesia). August 1-3, 2026 in Yogyakarta, Indonesia." />
     <meta property="og:url" content="https://yourusername.github.io/ieice-workshop/" />
-    <meta property="og:image" content="assets/ies-2026-logo.png" />
+    <meta property="og:image" content="assets/logo/ies-2026-logo.png" />
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Advancing Information and Telecommunication Workshop 2026" />
     <meta name="twitter:description" content="IEICE-IES Workshop | August 1-3, 2026 | Yogyakarta, Indonesia" />
-    <meta name="twitter:image" content="assets/ies-2026-logo.png" />
+    <meta name="twitter:image" content="assets/logo/ies-2026-logo.png" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/ies-2026-logo.png">
-    <link rel="apple-touch-icon" href="assets/ies-2026-logo.png">
+    <link rel="icon" type="image/png" href="assets/logo/ies-2026-logo.png">
+    <link rel="apple-touch-icon" href="assets/logo/ies-2026-logo.png">
     
     <script src="https://cdn.tailwindcss.com"></script>  <!-- Add Tailwind via CDN -->
     <script>
@@ -42,8 +42,16 @@
       }
     </script>
     <style>
+      /* Batik Medallion Colors - Traditional Jogja Palette (Modern Execution) */
+      :root{
+        --batik-bg:   #f5f1e8;     /* warm cream cloth (sogan batik base) */
+        --batik-ink:  #2c1810;     /* deep brown-black (traditional wax) */
+        --batik-ink2: #6b8e9e;     /* soft indigo-blue (classic batik blue) */
+        --batik-size: 220px;       /* tile size */
+      }
+      
       .section-container {
-        max-width: 1200px;
+        max-width: 1500px;
         margin-left: auto;
         margin-right: auto;
         padding-left: 2rem;
@@ -97,11 +105,92 @@
         animation-delay: 0.8s;
       }
       
-      /* Header Styles */
+      /* Header Styles with Background Image */
       header {
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #d946ef 100%);
+        background-image: url('assets/bg/1560-2.png');
+        background-size: 100%;
+        background-position: center bottom;
+        background-repeat: no-repeat;
         position: relative;
-        padding: 4rem 2rem;
+        padding: 1rem 1rem 4rem 2rem;
+        overflow: hidden;
+      }
+      
+      /* Dark overlay for better text readability */
+      header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+          rgba(78, 70, 229, 0) 0%, 
+          rgba(124, 58, 237, 0) 50%, 
+          rgba(255, 255, 255, 0) 100%);
+        z-index: 0;
+      }
+      
+      /* Ensure header content stays above pattern */
+      header > * {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* Footer Styles with Same Background Image as Header */
+      footer {
+        background-image: url('assets/bg/1560-2.png');
+        background-size: 25%;
+        background-position: center;
+        background-repeat: repeat;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      /* Dark overlay for footer text readability */
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, 
+          rgba(78, 70, 229, 0) 0%, 
+          rgba(124, 58, 237, 0) 50%, 
+          rgba(216, 70, 239, 0) 100%);
+        z-index: 0;
+      }
+      
+      /* Ensure footer content stays above background */
+      footer > * {
+        position: relative;
+        z-index: 1;
+      }
+      
+      /* About the Workshop Section with Wayang Background */
+      .workshop-about {
+        background-image: url('assets/bg/wayang-2.png');
+        background-size: 65%;
+        background-position: center left;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+      
+      .workshop-about::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.85);
+        z-index: 0;
+      }
+      
+      .workshop-about > * {
+        position: relative;
+        z-index: 1;
       }
       
       header h1 {
@@ -181,53 +270,35 @@
         transform: translateY(-8px) scale(1.02);
       }
       
-      /* Animated Background */
+      /* Animated Background with Batik Kawung Image */
       body {
         position: relative;
         overflow-x: hidden;
-        background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 50%, #fef3c7 100%);
       }
       
+      /* Batik Kawung Image Background */
       body::before {
         content: '';
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: 
-          /* Horizontal lines */
-          repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(139, 92, 246, 0.03) 50px, rgba(139, 92, 246, 0.03) 51px),
-          repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(139, 92, 246, 0.03) 50px, rgba(139, 92, 246, 0.03) 51px),
-          /* Circuit nodes */
-          radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 30% 40%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 50% 15%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 70% 35%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 85% 60%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 20% 70%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 60% 80%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          radial-gradient(circle at 90% 25%, rgba(139, 92, 246, 0.05) 2px, transparent 2px),
-          /* Circuit paths */
-          linear-gradient(45deg, transparent 48%, rgba(139, 92, 246, 0.03) 48%, rgba(139, 92, 246, 0.03) 52%, transparent 52%),
-          linear-gradient(-45deg, transparent 48%, rgba(139, 92, 246, 0.03) 48%, rgba(139, 92, 246, 0.03) 52%, transparent 52%);
-        background-size: 
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          100% 100%,
-          200px 200px,
-          200px 200px;
+        inset: 0;
+        background-color: var(--batik-bg);
+        background-image: url('assets/bg/batik-kawung.jpg');
+        background-size: auto;  /* maintain aspect ratio */
+        background-repeat: repeat;
+        background-position: center;
         z-index: -2;
+        
+        /* subtle cloth drift animation */
+        animation: batikImageDrift 120s linear infinite;
         opacity: 0.4;
       }
       
+      @keyframes batikImageDrift {
+        0%   { background-position: 0 0; }
+        100% { background-position: 400px 400px; }
+      }
+      
+      /* Light gradient overlay for modern clean look with batik tones */
       body::after {
         content: '';
         position: fixed;
@@ -235,24 +306,12 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: 
-          /* Microchip-like rectangles */
-          repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(59, 130, 246, 0.02) 100px, rgba(59, 130, 246, 0.02) 140px),
-          repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(59, 130, 246, 0.02) 100px, rgba(59, 130, 246, 0.02) 140px),
-          /* Connection lines with dots */
-          radial-gradient(circle at 25% 25%, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
-          radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
-          radial-gradient(circle at 75% 25%, rgba(236, 72, 153, 0.04) 1px, transparent 1px),
-          radial-gradient(circle at 25% 75%, rgba(236, 72, 153, 0.04) 1px, transparent 1px);
-        background-size: 
-          100% 100%,
-          100% 100%,
-          150px 150px,
-          150px 150px,
-          150px 150px,
-          150px 150px;
+        background: linear-gradient(135deg, 
+          rgba(245, 241, 232, 0.75) 0%,     /* warm cream */
+          rgba(219, 234, 240, 0.75) 50%,    /* soft blue */
+          rgba(242, 238, 228, 0.75) 100%);  /* light beige */
         z-index: -1;
-        opacity: 0.3;
+        pointer-events: none;
       }
       
       @keyframes gradientShift {
@@ -349,7 +408,7 @@
           <!-- Logo/Brand -->
           <div class="flex items-center space-x-2">
             <a href="https://ies.pens.ac.id/2026/" class="flex items-center hover:opacity-80 transition-opacity">
-              <img src="assets/ies-2026-logo.png" alt="IES 2026" class="h-10 w-auto">
+              <img src="assets/logo/ies-2026-logo.png" alt="IES 2026" class="h-10 w-auto">
             </a>
           </div>
           
@@ -361,6 +420,8 @@
             <a href="#important-dates" class="nav-link text-gray-700 font-medium">Important Dates</a>
             <a href="#submission" class="nav-link text-gray-700 font-medium">Submission</a>
             <a href="#speakers" class="nav-link text-gray-700 font-medium">Speakers</a>
+            <a href="#committee" class="nav-link text-gray-700 font-medium">Committee</a>
+            <a href="#contact" class="nav-link text-gray-700 font-medium">Contact</a>
           </div>
           
           <!-- Mobile Menu Button -->
@@ -379,44 +440,42 @@
           <a href="#important-dates" class="nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Important Dates</a>
           <a href="#submission" class="nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Submission</a>
           <a href="#speakers" class="nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Speakers</a>
+          <a href="#committee" class="nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Committee</a>
+          <a href="#contact" class="nav-link text-gray-700 font-medium" onclick="toggleMobileMenu()">Contact</a>
         </div>
       </div>
     </nav>
 
     <header id="home" class="text-white text-center shadow-lg">
       <div class="section-container">
-        <h1>Advancing Information and Telecommunication: Bridging Theory and Application</h1>
-        <p class="text-purple-100">A Collaborative Workshop between IEICE (Japan) and IES (Indonesia)</p>
-        
+        <h1 class="!text-white font-bold ">Advancing Information and Telecommunication: Bridging Theory and Application</h1>
+
+        <!-- Vertical spacer to increase spacing below the main heading -->
+        <div aria-hidden="true" class="h-6 md:h-12 lg:h-24"></div>
+                
         <!-- Supported By Section -->
-        <div class="mt-8 pt-6 border-t border-purple-300/30">
-          <p class="text-purple-200 text-sm font-semibold mb-4">SUPPORTED BY</p>
+        <div class="mt-8 pt-6">
+          <p class="text-white-200 text-lg font-medium mb-4 drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]">
+            <span class="bg-black/50 font-bold px-2 py-1 rounded-md">SUPPORTED BY</span></p>
           <div class="flex flex-wrap items-center justify-center gap-6 md:gap-8">
-            <!-- IEICE Logo -->
-            <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:scale-105 transition-transform">
-              <div class="w-24 h-16 md:w-32 md:h-20 flex items-center justify-center">
-                <img src="assets/ieice.png" alt="IEICE" class="max-w-full max-h-full object-contain">
-              </div>
-            </div>
-            
             <!-- PENS Logo -->
             <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:scale-105 transition-transform">
               <div class="w-24 h-16 md:w-32 md:h-20 flex items-center justify-center">
-                <img src="assets/Logo_PENS.png" alt="PENS" class="max-w-full max-h-full object-contain">
+                <img src="assets/logo/Logo_PENS.png" alt="PENS" class="max-w-full max-h-full object-contain">
               </div>
             </div>
             
-            <!-- PLN Logo -->
+            <!-- IEICE Logo -->
             <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:scale-105 transition-transform">
               <div class="w-24 h-16 md:w-32 md:h-20 flex items-center justify-center">
-                <img src="assets/Logo_PLN.png" alt="PLN" class="max-w-full max-h-full object-contain">
+                <img src="assets/logo/ieice.png" alt="IEICE" class="max-w-full max-h-full object-contain">
               </div>
             </div>
             
-            <!-- Shell Logo -->
+            <!-- BRIN Logo -->
             <div class="bg-white/90 backdrop-blur-sm rounded-lg p-4 shadow-lg hover:scale-105 transition-transform">
               <div class="w-24 h-16 md:w-32 md:h-20 flex items-center justify-center">
-                <img src="assets/Shell_logo.svg" alt="Shell" class="max-w-full max-h-full object-contain">
+                <img src="assets/logo/brin_logo.png" alt="BRIN" class="max-w-full max-h-full object-contain">
               </div>
             </div>
           </div>
@@ -430,11 +489,11 @@
         <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">International Collaboration</h2>
         
         <!-- Collaboration Visualizer -->
-        <div class="flex items-center justify-center gap-4 mb-8">
+        <div class="flex flex-wrap items-center justify-center gap-4 mb-8">
           <!-- IES Logo/Box -->
-          <div class="flex-1 max-w-xs">
+          <div class="flex-1 max-w-xs min-w-[240px]">
             <a href="https://ies.pens.ac.id/" target="_blank" rel="noopener noreferrer" class="block">
-              <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-8 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
+              <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-8 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full">
                 <h3 class="text-2xl font-bold mb-2">IES</h3>
                 <p class="text-sm">Politeknik Elektronika Negeri Surabaya</p>
                 <p class="text-xs mt-2 opacity-90">International Electronics Symposium</p>
@@ -442,45 +501,71 @@
             </a>
           </div>
           
-          <!-- Collaboration Symbol -->
+          <!-- Collaboration Symbol 1 -->
           <div class="flex flex-col items-center">
-            <svg class="w-16 h-16 text-purple-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-            </svg>
-            <p class="text-sm font-semibold text-gray-700 mt-2">Partnership</p>
+            <img src="assets/gunungan.png" alt="Gunungan" class="w-16 h-16 object-contain">
           </div>
           
           <!-- IEICE Logo/Box -->
-          <div class="flex-1 max-w-xs">
+          <div class="flex-1 max-w-xs min-w-[240px]">
             <a href="https://www.ieice.org/eng/index.html" target="_blank" rel="noopener noreferrer" class="block">
-              <div class="bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white p-8 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
+              <div class="bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white p-8 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full">
                 <h3 class="text-2xl font-bold mb-2">IEICE</h3>
                 <p class="text-sm">Japan</p>
                 <p class="text-xs mt-2 opacity-90">Institute of Electronics, Information and Communication Engineers</p>
               </div>
             </a>
           </div>
+          
+          <!-- Collaboration Symbol 2 -->
+          <div class="flex flex-col items-center">
+            <img src="assets/gunungan.png" alt="Gunungan" class="w-16 h-16 object-contain">
+          </div>
+          
+          <!-- BRIN Logo/Box -->
+          <div class="flex-1 max-w-xs min-w-[240px]">
+            <a href="https://www.brin.go.id/" target="_blank" rel="noopener noreferrer" class="block">
+              <div class="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-8 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full">
+                <h3 class="text-2xl font-bold mb-2">BRIN</h3>
+                <p class="text-sm">Indonesia</p>
+                <p class="text-xs mt-2 opacity-90">National Research and Innovation Agency</p>
+              </div>
+            </a>
+          </div>
         </div>
         
         <!-- About the Workshop -->
-        <div class="bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-200 mb-8">
-        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">About the Workshop</h3>
-        <div class="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-            The <span class="font-semibold text-indigo-700">Advancing Information and Telecommunication: Bridging Theory and Application</span> workshop is a collaborative initiative between IEICE (Japan) and IES–PENS (Indonesia). Hosted in Yogyakarta, Indonesia, this event brings together researchers, engineers, and practitioners to strengthen the connection between theoretical innovation and real-world technological solutions in information and telecommunication systems.
-            </p>
-            <p>
-            The workshop highlights cross-disciplinary topics such as signal processing, networking architectures, IoT and AI-driven systems, 5G/6G communication, and resilient digital infrastructures. Through technical presentations, invited talks, and interactive sessions, participants will explore how fundamental theories can lead to impactful implementations across industries and research communities.
-            </p>
-            <p>
-            <span class="font-semibold">Student participation is strongly encouraged</span> as part of our commitment to cultivating the next generation of innovators. Students are invited to present their research, share prototypes, and engage in feedback sessions designed to promote international mentorship and collaboration between Japan and Indonesia.
-            </p>
-            <p class="italic text-indigo-600 font-semibold text-center">
-            Join us in Yogyakarta to bridge theory and application—where ideas evolve into innovation, and future researchers find their voice.
-            </p>
+        <div class="workshop-about bg-white/90 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-blue-200 mb-8">
+          <div class="ml-[35%]">
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center">
+              About the Workshop
+            </h3>
+            <div class="space-y-6 text-gray-700 leading-relaxed text-lg md:text-xl">
+              <p>
+                The <span class="font-semibold text-indigo-700">Advancing Information and Telecommunication: Bridging Theory and Application</span>
+                workshop is a collaborative initiative between IEICE (Japan) and IES–PENS (Indonesia). Hosted in Yogyakarta, Indonesia,
+                this event brings together researchers, engineers, and practitioners to strengthen the connection between theoretical
+                innovation and real-world technological solutions in information and telecommunication systems.
+              </p>
+              <p>
+                The workshop highlights cross-disciplinary topics such as signal processing, networking architectures, IoT and
+                AI-driven systems, 5G/6G communication, and resilient digital infrastructures. Through technical presentations, invited
+                talks, and interactive sessions, participants will explore how fundamental theories can lead to impactful implementations
+                across industries and research communities.
+              </p>
+              <p>
+                <span class="font-semibold">Student participation is strongly encouraged</span> as part of our commitment to cultivating the
+                next generation of innovators. Students are invited to present their research, share prototypes, and engage in feedback
+                sessions designed to promote international mentorship and collaboration between Japan and Indonesia.
+              </p>
+              <p class="italic text-indigo-600 font-semibold text-center text-xl md:text-2xl">
+                Join us in Yogyakarta to bridge theory and application—where ideas evolve into innovation, and future researchers find
+                their voice.
+              </p>
+            </div>
+          </div>
         </div>
-        </div>
-      </section>
+
 
       <!-- Event Details Section -->
       <section id="event-details" class="mb-20 scroll-reveal">
@@ -817,7 +902,7 @@
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
                   [Professor Name]
                   <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
-                    <img src="assets/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
+                    <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Okayama University, Japan</p>
@@ -836,7 +921,7 @@
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
                   [Professor/Dr. Name]
                   <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
-                    <img src="assets/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
+                    <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Politeknik Elektronika Negeri Surabaya (PENS), Indonesia</p>
@@ -855,7 +940,7 @@
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
                   [Professor/Dr. Name]
                   <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
-                    <img src="assets/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
+                    <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Politeknik Elektronika Negeri Surabaya (PENS), Indonesia</p>
@@ -874,7 +959,7 @@
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
                   [Dr./Researcher Name]
                   <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
-                    <img src="assets/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
+                    <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Badan Riset dan Inovasi Nasional (BRIN), Indonesia</p>
@@ -884,11 +969,247 @@
           </div>
         </div>
       </section>
+
+      <!-- Committee Section -->
+      <section id="committee" class="section-container scroll-reveal">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Organizing Committee</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <!-- General Chairs -->
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-purple-200">
+            <h3 class="text-2xl font-bold text-indigo-700 mb-6">General Chairs</h3>
+            <div class="flex gap-6 justify-center">
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/committee/nogami.jpg" alt="Prof. Yasuyuki Nogami" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Prof. Yasuyuki Nogami</p>
+                <p class="text-xs text-gray-600 text-center">Okayama University, IEICE, Japan</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/committee/amang.jpg" alt="Prof. Amang Sudarsono" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Prof. Amang Sudarsono</p>
+                <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="Prof. [Name]" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Prof. [Name]</p>
+                <p class="text-xs text-gray-600 text-center">Badan Riset dan Inovasi Nasional, Indonesia</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Technical Program Chairs -->
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-purple-200">
+            <h3 class="text-2xl font-bold text-indigo-700 mb-6">Technical Program Chairs</h3>
+            <div class="flex gap-6 justify-center">
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Dr. [Name]</p>
+                <p class="text-xs text-gray-600 text-center">Okayama University, Japan</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Dr. [Name]</p>
+                <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Dr. [Name]</p>
+                <p class="text-xs text-gray-600 text-center">Badan Riset dan Inovasi Nasional, Indonesia</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Organizing Committee -->
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-purple-200">
+            <h3 class="text-2xl font-bold text-indigo-700 mb-6">Organizing Committee</h3>
+            <div class="flex gap-4 justify-center">
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/committee/maya.png" alt="Dr. Maya Rahayu" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Dr. Maya Rahayu</p>
+                <p class="text-xs text-gray-600 text-center">Politeknik Negeri Bandung, Indonesia</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="Safira Adine Kinari" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Safira Adine Kinari</p>
+                <p class="text-xs text-gray-600 text-center">Okayama University, IEICE, Japan</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">[Name]</p>
+                <p class="text-xs text-gray-600 text-center">Badan Riset dan Inovasi Nasional, Indonesia</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Publication Chairs -->
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-purple-200">
+            <h3 class="text-2xl font-bold text-indigo-700 mb-6">Publication Chairs</h3>
+            <div class="flex gap-6 justify-center">
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/committee/amma.jpg" alt="Amma Liesvarastranta Haz" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Dr. Amma Liesvarastranta Haz</p>
+                <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
+              </div>
+              <div class="flex flex-col items-center">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                  <img src="assets/committee/naufal.jpeg" alt="Naufal Adi Satrio" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-center text-sm">Naufal Adi Satrio</p>
+                <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Technical Program Committee -->
+        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-purple-200">
+          <h3 class="text-2xl font-bold text-indigo-700 mb-6">Technical Program Committee</h3>
+          <div class="grid md:grid-cols-5 gap-6">
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+              </div>
+              <p class="font-semibold text-center text-xs">[Name]</p>
+              <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+              </div>
+              <p class="font-semibold text-center text-xs">[Name]</p>
+              <p class="text-xs text-gray-600 text-center">[Institution], Indonesia</p>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+              </div>
+              <p class="font-semibold text-center text-xs">[Name]</p>
+              <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+              </div>
+              <p class="font-semibold text-center text-xs">[Name]</p>
+              <p class="text-xs text-gray-600 text-center">[Institution], Indonesia</p>
+            </div>
+            <div class="flex flex-col items-center">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-indigo-600 mb-2">
+                <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover">
+              </div>
+              <p class="font-semibold text-center text-xs">[Name]</p>
+              <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section-container scroll-reveal">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Contact Us</h2>
+        
+        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <!-- IEICE Contact -->
+          <div class="bg-gradient-to-br from-violet-50 to-fuchsia-50 p-8 rounded-xl shadow-lg border border-violet-200 hover-parallax">
+            <div class="flex items-center mb-4">
+              <svg class="w-8 h-8 text-violet-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="text-2xl font-bold text-violet-700">IEICE Contact</h3>
+            </div>
+            <div class="space-y-3 text-gray-700">
+              <p class="font-semibold">Institute of Electronics, Information and Communication Engineers</p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <a href="mailto:workshop@ieice.org" class="hover:text-violet-600 transition-colors">[email]@ieice.org</a>
+              </p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+                <span>+81-[phone number]</span>
+              </p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+                <a href="https://www.ieice.org/eng/index.html" target="_blank" class="hover:text-violet-600 transition-colors">www.ieice.org</a>
+              </p>
+            </div>
+          </div>
+          
+          <!-- IES-PENS Contact -->
+          <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-xl shadow-lg border border-emerald-200 hover-parallax">
+            <div class="flex items-center mb-4">
+              <svg class="w-8 h-8 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <h3 class="text-2xl font-bold text-emerald-700">IES-PENS Contact</h3>
+            </div>
+            <div class="space-y-3 text-gray-700">
+              <p class="font-semibold">International Electronics Symposium</p>
+              <p class="font-semibold">Politeknik Elektronika Negeri Surabaya</p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <a href="mailto:ies@pens.ac.id" class="hover:text-emerald-600 transition-colors">ies@pens.ac.id</a>
+              </p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+                <span>+62-31-[phone number]</span>
+              </p>
+              <p class="flex items-start">
+                <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                </svg>
+                <a href="https://ies.pens.ac.id/" target="_blank" class="hover:text-emerald-600 transition-colors">ies.pens.ac.id</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Additional Information -->
+        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200 mt-8 max-w-4xl mx-auto">
+          <h3 class="text-xl font-bold text-gray-800 mb-3 text-center">General Inquiries</h3>
+          <p class="text-gray-700 text-center">
+            For questions about paper submissions, registration, or general workshop information, 
+            please contact the organizing committee at: 
+            <a href="mailto:workshop-ies-ieice@pens.ac.id" class="text-indigo-600 hover:text-indigo-800 font-semibold transition-colors">workshop-ies-ieice@pens.ac.id</a>
+          </p>
+        </div>
+      </section>
     </main>
 
-    <footer class="bg-gradient-to-r from-indigo-600 via-purple-600 to-fuchsia-600 text-white p-6 text-center shadow-lg">
-      <small class="text-purple-100">&copy; 2025 Advancing Information and Telecommunication Workshop</small>
-      <p class="mt-2 text-sm text-purple-100">Organized by IES (Indonesia) and IEICE (Japan)</p>
+    <footer class="text-white p-12 text-center shadow-lg">
+      <div class="-mt-3">
+        <small class="-mt-1 text-white-100 font-bold">&copy; 2025 Advancing Information and Telecommunication Workshop</small>
+        <p class="mt-0.5 text-sm text-white-100 font-bold">Organized by IES, IEICE, and BRIN</p>
+      </div>
     </footer>
 
     <script>
