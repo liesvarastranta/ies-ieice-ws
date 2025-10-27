@@ -8,7 +8,7 @@ A collaborative workshop website between **IEICE (Japan)** and **IES–PENS (Ind
 
 ## 🌐 Live Website
 
-Visit the workshop website: [https://yourusername.github.io/ieice-workshop](https://yourusername.github.io/ieice-workshop)
+Visit the workshop website: [https://liesvarastranta.github.io/ies-ieice-ws/]
 
 *(Replace with your actual GitHub Pages URL)*
 
