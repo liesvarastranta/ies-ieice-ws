@@ -483,6 +483,86 @@
     </style>
   </head>
   <body>
+    <!-- Simple client-side login overlay (plaintext credentials - not secure for production) -->
+    <div id="auth-overlay" class="fixed inset-0 bg-white/95 z-[9999] flex items-center justify-center p-6">
+      <div class="max-w-md w-full bg-white rounded-xl shadow-xl p-6">
+        <h2 class="text-2xl font-bold mb-2 text-gray-800">Site Login</h2>
+        <p class="text-sm text-gray-600 mb-4">Enter ID and password to view this site.</p>
+        <form id="auth-form" class="space-y-4">
+          <input id="auth-id" class="w-full p-2 border rounded" placeholder="ID" aria-label="ID" required />
+          <input id="auth-pw" type="password" class="w-full p-2 border rounded" placeholder="Password" aria-label="Password" required />
+          <div class="flex items-center justify-between">
+            <button id="auth-submit" type="submit" class="px-4 py-2 bg-primary text-white rounded">Enter</button>
+            <button id="auth-clear" type="button" class="text-sm text-gray-500">Clear</button>
+          </div>
+          <p id="auth-error" class="text-sm text-red-600 hidden mt-2">Invalid credentials. Please try again.</p>
+        </form>
+        <p class="text-xs text-gray-500 mt-3">Note: This is a client-side gate for convenience. For secure protection, use server-side HTTP Basic Auth (see instructions in page footer).</p>
+      </div>
+    </div>
+
+    <script>
+      // === Client-side auth settings (edit these values) ===
+      // WARNING: These values are visible to anyone with access to the site files.
+      const AUTH_ID = 'admin';
+      const AUTH_PW = 'ieice2026';
+
+      // Quick helpers
+      const overlay = document.getElementById('auth-overlay');
+      const form = document.getElementById('auth-form');
+      const inputId = document.getElementById('auth-id');
+      const inputPw = document.getElementById('auth-pw');
+      const error = document.getElementById('auth-error');
+      const clearBtn = document.getElementById('auth-clear');
+
+      function showError(message){
+        error.textContent = message || 'Invalid credentials. Please try again.';
+        error.classList.remove('hidden');
+      }
+
+      function hideOverlay(){
+        if(overlay) overlay.style.display = 'none';
+      }
+
+      function checkStored(){
+        try{
+          if(sessionStorage.getItem('site_auth') === '1'){
+            hideOverlay();
+            return true;
+          }
+        }catch(e){/* ignore */}
+        return false;
+      }
+
+      // Initialize: if already logged in for this tab, hide overlay
+      document.addEventListener('DOMContentLoaded', ()=>{
+        if(checkStored()) return;
+        // focus first field
+        inputId.focus();
+      });
+
+      // Form submit handler
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        const id = inputId.value.trim();
+        const pw = inputPw.value;
+        if(id === AUTH_ID && pw === AUTH_PW){
+          try{ sessionStorage.setItem('site_auth','1'); }catch(e){}
+          hideOverlay();
+        }else{
+          showError('Invalid ID or password.');
+          inputPw.value = '';
+          inputPw.focus();
+        }
+      });
+
+      clearBtn.addEventListener('click', ()=>{
+        inputId.value = '';
+        inputPw.value = '';
+        error.classList.add('hidden');
+        inputId.focus();
+      });
+    </script>
     <!-- Navigation Bar -->
     <nav id="navbar" class="py-3">
       <div class="section-container">
@@ -861,101 +941,56 @@
       <!-- Important Dates Section -->
       <section id="important-dates" class="mb-20 scroll-reveal">
         <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Important Dates</h2>
-        
+
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Left Column: Dates List -->
-          <div class="bg-white/80 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-purple-100">
-            <div class="space-y-4">
-              <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-emerald-500 rounded-full mr-4"></div>
-                  <span class="text-gray-700 font-semibold">Abstract Submission Deadline</span>
-                </div>
-                <span class="text-gray-600 font-bold">TBA</span>
-              </div>
-
-              <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-blue-500 rounded-full mr-4"></div>
-                  <span class="text-gray-700 font-semibold">Notification of Acceptance</span>
-                </div>
-                <span class="text-gray-600 font-bold">TBA</span>
-              </div>
-
-              <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-violet-500 rounded-full mr-4"></div>
-                  <span class="text-gray-700 font-semibold">Early Bird Registration</span>
-                </div>
-                <span class="text-gray-600 font-bold">TBA</span>
-              </div>
-
-              <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-amber-500 rounded-full mr-4"></div>
-                  <span class="text-gray-700 font-semibold">Final Registration Deadline</span>
-                </div>
-                <span class="text-gray-600 font-bold">TBA</span>
-              </div>
-
-              <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                  <div class="w-3 h-3 bg-fuchsia-500 rounded-full mr-4"></div>
-                  <span class="text-gray-700 font-semibold">Workshop Dates</span>
-                </div>
-                <span class="text-fuchsia-700 font-bold text-lg">August 1–3, 2026</span>
-              </div>
-            </div>
+          <!-- Left Column: IEICE Track Dates -->
+          <div class="bg-gradient-to-br from-violet-50 to-fuchsia-50 p-6 rounded-xl shadow-lg border-2 border-violet-300">
+            <h3 class="text-xl font-bold mb-4 text-violet-700">IEICE TC on IT Track</h3>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-gray-700"><th class="pb-2">Milestone</th><th class="pb-2">Date</th></tr>
+              </thead>
+              <tbody>
+                <tr class="border-t"><td class="py-2">Abstract Submission Deadline</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Quick Review</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Full Manuscript Submission</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Camera-ready Submission</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Registration Deadline</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Workshop Dates</td><td class="py-2 font-semibold text-fuchsia-700">August 1–3, 2026</td></tr>
+              </tbody>
+            </table>
           </div>
-          
-          <!-- Right Column: Countdown Timer -->
-          <div class="bg-gradient-to-br from-purple-100 via-fuchsia-100 to-pink-100 p-8 rounded-xl shadow-lg border border-purple-200">
-            <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Countdown to Workshop</h3>
-            
-            <div class="grid grid-cols-2 gap-4 mb-6">
-              <!-- Days -->
-              <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center shadow-md">
-                <div id="countdown-days" class="text-4xl font-bold text-purple-600">000</div>
-                <div class="text-sm text-gray-600 font-semibold mt-1">Days</div>
-              </div>
-              
-              <!-- Hours -->
-              <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center shadow-md">
-                <div id="countdown-hours" class="text-4xl font-bold text-fuchsia-600">00</div>
-                <div class="text-sm text-gray-600 font-semibold mt-1">Hours</div>
-              </div>
-              
-              <!-- Minutes -->
-              <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center shadow-md">
-                <div id="countdown-minutes" class="text-4xl font-bold text-violet-600">00</div>
-                <div class="text-sm text-gray-600 font-semibold mt-1">Minutes</div>
-              </div>
-              
-              <!-- Seconds -->
-              <div class="bg-white/80 backdrop-blur-sm rounded-lg p-4 text-center shadow-md">
-                <div id="countdown-seconds" class="text-4xl font-bold text-pink-600">00</div>
-                <div class="text-sm text-gray-600 font-semibold mt-1">Seconds</div>
-              </div>
-            </div>
-            
-            <div class="text-center">
-              <p class="text-gray-700 font-semibold text-lg mb-2">August 1, 2026</p>
-              <p class="text-gray-600 text-sm">Workshop Opening Day</p>
-            </div>
+
+          <!-- Right Column: IES Track Dates -->
+          <div class="bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-xl shadow-lg border-2 border-emerald-300">
+            <h3 class="text-xl font-bold mb-4 text-emerald-700">IES Track</h3>
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="text-left text-gray-700"><th class="pb-2">Milestone</th><th class="pb-2">Date</th></tr>
+              </thead>
+              <tbody>
+                <tr class="border-t"><td class="py-2">Full Paper Submission Deadline</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Double-Blind Review</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Notification of Acceptance</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Camera-ready Submission</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Registration Deadline</td><td class="py-2 font-semibold">TBA</td></tr>
+                <tr class="border-t"><td class="py-2">Workshop Dates</td><td class="py-2 font-semibold text-fuchsia-700">August 1–3, 2026</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
       <!-- Submission Guidelines Section -->
       <section id="submission" class="mb-20 scroll-reveal">
-        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Submission Guidelines</h2>
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">Manuscript Submission Guidelines</h2>
         
         <div class="grid md:grid-cols-2 gap-8 mb-8">
-          <!-- IEICE TC on IT Participants -->
+          <!-- IEICE Track Submission -->
           <div class="bg-gradient-to-br from-violet-50 to-fuchsia-50 rounded-xl shadow-lg border-2 border-violet-300 overflow-hidden">
             <div class="bg-violet-600 text-white p-4 text-center">
-              <h3 class="text-2xl font-bold">IEICE TC on IT Participants</h3>
-              <p class="text-sm text-violet-100">Japan</p>
+              <h3 class="text-2xl font-bold">IEICE TC on IT Track</h3>
+              <!-- <p class="text-sm text-violet-100">Abstract → Quick Review → Full Manuscript</p> -->
             </div>
             <div class="p-6">
               <div class="space-y-4">
@@ -963,8 +998,8 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3">1</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Submit Abstract Only</h4>
-                    <p class="text-sm text-gray-600">Submit your abstract through the IEICE TC on IT system. <span class="font-semibold text-violet-700">Full paper not required.</span></p>
+                    <h4 class="font-bold text-gray-800 mb-1">Submit Abstract</h4>
+                    <p class="text-sm text-gray-600">Submit a short abstract (typically 200-300 words) outlining your research topic, methodology, and expected results.</p>
                   </div>
                 </div>
                 
@@ -972,8 +1007,8 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3">2</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Acceptance Notification</h4>
-                    <p class="text-sm text-gray-600">Wait for review results and acceptance notification.</p>
+                    <h4 class="font-bold text-gray-800 mb-1">Quick Review</h4>
+                    <p class="text-sm text-gray-600">Your abstract will undergo initial screening by the technical committee. You will receive feedback quickly.</p>
                   </div>
                 </div>
                 
@@ -981,29 +1016,30 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3">3</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Submit Presentation (PPT) - Mandatory</h4>
-                    <p class="text-sm text-gray-600"><span class="font-semibold text-violet-700">PPT submission is REQUIRED for all IEICE TC on IT participants.</span> Upload your PowerPoint presentation to the shared cloud repository after acceptance.</p>
+                    <h4 class="font-bold text-gray-800 mb-1">Submit Full Manuscript</h4>
+                    <p class="text-sm text-gray-600">Revise per reviewer comments, prepare and submit your full manuscript following IEICE formatting guidelines.</p>
                   </div>
                 </div>
                 
-                <!-- IEICE TC on IT Link -->
+                <!-- IEICE Link -->
                 <div class="mt-6 pt-4 border-t border-violet-200">
                   <a href="#" class="inline-flex items-center px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                     </svg>
-                    Submit via IEICE TC on IT
+                    Submit to IEICE Track
                   </a>
+                  <p class="text-xs text-gray-500 mt-2">Submission link will be announced soon</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- IES Participants -->
+          <!-- IES Track Submission -->
           <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl shadow-lg border-2 border-emerald-300 overflow-hidden">
             <div class="bg-emerald-600 text-white p-4 text-center">
-              <h3 class="text-2xl font-bold">IES Participants</h3>
-              <p class="text-sm text-emerald-100">Indonesia</p>
+              <h3 class="text-2xl font-bold">IES Track</h3>
+              <!-- <p class="text-sm text-emerald-100">Full Paper via EDAS</p> -->
             </div>
             <div class="p-6">
               <div class="space-y-4">
@@ -1011,8 +1047,8 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3">1</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Submit Paper via EDAS</h4>
-                    <p class="text-sm text-gray-600">Submit your full paper through the EDAS system for review.</p>
+                    <h4 class="font-bold text-gray-800 mb-1">Prepare Full Paper</h4>
+                    <p class="text-sm text-gray-600">Write your complete manuscript following IEEE or IES formatting guidelines. Include abstract, introduction, methodology, results, and references.</p>
                   </div>
                 </div>
                 
@@ -1020,8 +1056,8 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3">2</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Acceptance Notification</h4>
-                    <p class="text-sm text-gray-600">Wait for review results and acceptance notification.</p>
+                    <h4 class="font-bold text-gray-800 mb-1">Submit via EDAS</h4>
+                    <p class="text-sm text-gray-600">Register an account on EDAS (if you don't have one) and submit your full paper through the IES submission portal.</p>
                   </div>
                 </div>
                 
@@ -1029,8 +1065,17 @@
                 <div class="flex items-start">
                   <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3">3</div>
                   <div>
-                    <h4 class="font-bold text-gray-800 mb-1">Submit Presentation (PPT) - Optional</h4>
-                    <p class="text-sm text-gray-600">If you wish to join this workshop, upload your PowerPoint presentation to the shared cloud repository. <span class="font-semibold text-emerald-700">PPT submission serves as your workshop participation ticket.</span></p>
+                    <h4 class="font-bold text-gray-800 mb-1">Peer Review</h4>
+                    <p class="text-sm text-gray-600">Your paper will undergo double-blind peer review. Reviewers will evaluate technical quality, originality, and clarity.</p>
+                  </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex items-start">
+                  <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3">4</div>
+                  <div>
+                    <h4 class="font-bold text-gray-800 mb-1">Camera-ready Submission</h4>
+                    <p class="text-sm text-gray-600">After acceptance, revise your paper according to reviewer feedback and submit the final camera-ready version.</p>
                   </div>
                 </div>
                 
@@ -1042,79 +1087,182 @@
                     </svg>
                     Submit via EDAS
                   </a>
+                  <p class="text-xs text-gray-500 mt-2">EDAS link will be announced soon</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- IEICE TC on IT Student Membership Info -->
-        <div class="mt-8 mb-12 bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-200">
+        <!-- Formatting & Requirements -->
+        <div class="bg-white/90 p-6 rounded-xl shadow-lg border border-gray-200 mb-8">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Formatting Requirements</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-violet-700 mb-2">IEICE Track</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+                <li>Abstract: 200-300 words</li>
+                <li>Full manuscript: Follow IEICE template</li>
+                <li>Language: English</li>
+                <li>File format: PDF for review, LaTeX/Word source for final</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold text-emerald-700 mb-2">IES Track</h4>
+              <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
+                <li>Full paper: 4-6 pages (IEEE format recommended)</li>
+                <li>Language: English</li>
+                <li>File format: PDF for submission</li>
+                <li>Blind review: Remove author names/affiliations from submitted PDF</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- IEICE Student Membership Info -->
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-xl border border-indigo-200">
           <div class="flex items-start">
             <svg class="w-6 h-6 text-indigo-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
             </svg>
             <div>
-              <h4 class="font-bold text-gray-800 mb-2">IEICE TC on IT Student Membership</h4>
-              <p class="text-gray-700">Students are encouraged to register as IEICE TC on IT student members to enjoy special benefits, including discounted registration fees, access to exclusive resources, and networking opportunities with leading researchers in information and communication engineering.</p>
+              <h4 class="font-bold text-gray-800 mb-2">IEICE Student Membership Benefits</h4>
+              <p class="text-gray-700">Students are encouraged to register as IEICE student members to enjoy special benefits, including discounted registration fees, access to exclusive resources, and networking opportunities with leading researchers in information and communication engineering.</p>
             </div>
           </div>
         </div>
-    
+      </section>
 
-        <!-- PPT Submission & Copyright Notice -->
-        <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-200 shadow-lg">
+      <!-- Presentation Submission for shared presentation repository -->
+      <section id="presentation-submission" class="mb-20 scroll-reveal">
+        <h2 class="text-4xl font-bold text-center mb-8 text-gray-800">Presentation Submission</h2>
+        <p class="text-center text-gray-600 mb-12 max-w-3xl mx-auto"></p>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+          <!-- IEICE Track Presentation -->
+          <div class="bg-gradient-to-br from-violet-50 to-fuchsia-50 rounded-xl shadow-lg border-2 border-violet-300 overflow-hidden">
+            <div class="bg-violet-600 text-white p-4 text-center">
+              <h3 class="text-2xl font-bold">IEICE Track</h3>
+              <p class="text-sm text-violet-100">Presentation Submission (Mandatory)</p>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div class="bg-violet-100 border-l-4 border-violet-600 p-3 rounded">
+                  <p class="text-sm text-violet-900"><strong>Required:</strong> All IEICE participants must submit presentation slides after acceptance.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">1</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Receive Acceptance</h4>
+                      <p class="text-xs text-gray-600">Wait for acceptance notification from the committee</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">2</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Prepare Presentation</h4>
+                      <p class="text-xs text-gray-600">Create PowerPoint slides (PPT/PPTX format, max 50MB recommended)</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-violet-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">3</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Submit via Form</h4>
+                      <p class="text-xs text-gray-600">Upload your presentation file through the official submission form</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-violet-200">
+                  <a href="#" class="inline-flex items-center px-4 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-sm">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                    </svg>
+                    Upload Presentation
+                  </a>
+                  <p class="text-xs text-gray-500 mt-2">Link will be sent after acceptance</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IES Track Presentation -->
+          <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl shadow-lg border-2 border-emerald-300 overflow-hidden">
+            <div class="bg-emerald-600 text-white p-4 text-center">
+              <h3 class="text-2xl font-bold">IES Track</h3>
+              <p class="text-sm text-emerald-100">Presentation Submission (Recommended)</p>
+            </div>
+            <div class="p-6">
+              <div class="space-y-4">
+                <div class="bg-emerald-100 border-l-4 border-emerald-600 p-3 rounded">
+                  <p class="text-sm text-emerald-900"><strong>Recommended:</strong> IES participants are encouraged to submit presentation slides for workshop sessions.</p>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">1</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Receive Acceptance</h4>
+                      <p class="text-xs text-gray-600">Wait for acceptance notification from the committee</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">2</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Prepare Presentation</h4>
+                      <p class="text-xs text-gray-600">Create PowerPoint slides (PPT/PPTX format, max 50MB recommended)</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start">
+                    <div class="flex-shrink-0 w-8 h-8 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold mr-3 text-sm">3</div>
+                    <div>
+                      <h4 class="font-bold text-gray-800 text-sm mb-1">Submit via Form</h4>
+                      <p class="text-xs text-gray-600">Upload your presentation file through the official submission form</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-emerald-200">
+                  <a href="#" class="inline-flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                    </svg>
+                    Upload Presentation
+                  </a>
+                  <p class="text-xs text-gray-500 mt-2">Link will be sent after acceptance</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sharing Agreement & Copyright Notice -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-300 shadow-lg">
           <div class="flex items-start mb-4">
             <svg class="w-8 h-8 text-amber-600 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
             <div class="flex-1">
-              <h3 class="text-xl font-bold text-gray-800 mb-2">Presentation Submission (After Acceptance)</h3>
-              <p class="text-gray-700 mb-4">Once your paper is accepted, you must submit your presentation details and upload your PowerPoint file through our official Google Form.</p>
-              
-              <div class="bg-white/70 p-4 rounded-lg mb-4">
-                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
-                  <svg class="w-5 h-5 text-purple-600 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+              <h3 class="text-xl font-bold text-gray-800 mb-3">Presentation Sharing Agreement</h3>
+              <div class="bg-white/70 p-4 rounded-lg mb-4 space-y-3">
+                <p class="text-sm text-gray-700">
+                  <svg class="w-5 h-5 text-amber-600 inline mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
                   </svg>
-                  Submission Process
-                </h4>
-                
-                <div class="space-y-3 text-sm text-gray-700 mb-4">
-                  <div class="flex items-start">
-                    <span class="inline-flex items-center justify-center w-6 h-6 bg-purple-100 text-purple-700 rounded-full font-bold text-xs mr-3 flex-shrink-0">1</span>
-                    <p><strong>Receive acceptance notification</strong> from the organizing committee</p>
-                  </div>
-                  <div class="flex items-start">
-                    <span class="inline-flex items-center justify-center w-6 h-6 bg-purple-100 text-purple-700 rounded-full font-bold text-xs mr-3 flex-shrink-0">2</span>
-                    <p><strong>Prepare your presentation</strong> (PPT/PPTX format, recommended max 50MB)</p>
-                  </div>
-                  <div class="flex items-start">
-                    <span class="inline-flex items-center justify-center w-6 h-6 bg-purple-100 text-purple-700 rounded-full font-bold text-xs mr-3 flex-shrink-0">3</span>
-                    <p><strong>Click the button below</strong> to open the Google Form</p>
-                  </div>
-                  <div class="flex items-start">
-                    <span class="inline-flex items-center justify-center w-6 h-6 bg-purple-100 text-purple-700 rounded-full font-bold text-xs mr-3 flex-shrink-0">4</span>
-                    <p><strong>Fill in your details</strong> and upload your presentation file in the form</p>
-                  </div>
-                </div>
-
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
-                  <p class="text-sm text-blue-800">
-                    <strong>📋 What you'll need:</strong> Paper title, author name(s), affiliation, presentation file (PPT/PPTX)
-                  </p>
-                </div>
-
-                <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg">
-                  <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-                  </svg>
-                  Open Submission Form
-                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                  </svg>
-                </a>
-                <p class="text-xs text-gray-500 mt-3">📌 Form link will be provided after paper acceptance</p>
+                  <strong>By submitting your presentation, you agree to:</strong>
+                </p>
+                <ul class="text-sm text-gray-700 space-y-2 pl-7 list-disc">
+                  <li><strong>Share with participants:</strong> Your presentation will be made available to all workshop attendees for educational and collaborative purposes.</li>
+                  <li><strong>Archival rights:</strong> The organizing committee may archive and distribute your presentation materials to registered participants and for workshop documentation.</li>
+                  <li><strong>Educational use:</strong> Presentations may be used in workshop proceedings, shared repositories, or educational materials related to the workshop.</li>
+                  <li><strong>Content ownership:</strong> You confirm that you have the necessary rights to all content (images, data, text) included in your presentation.</li>
+                </ul>
               </div>
 
               <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
@@ -1123,8 +1271,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                   </svg>
                   <div>
-                    <h4 class="font-bold text-red-800 mb-1">Important Copyright Notice</h4>
-                    <p class="text-sm text-red-700">By submitting your presentation through this form, you automatically agree to transfer the copyright of your presentation materials to the workshop committee for the purposes of sharing, archiving, and educational distribution. Please ensure you have the necessary rights to all content in your presentation.</p>
+                    <h4 class="font-bold text-red-800 mb-1">Important Notice</h4>
+                    <p class="text-sm text-red-700">Submission of your presentation constitutes acceptance of these sharing terms. Please ensure all content is appropriate for public academic sharing and that you have obtained necessary permissions for any third-party materials used.</p>
                   </div>
                 </div>
               </div>
@@ -1197,16 +1345,17 @@
         <div class="speaker-card mb-10">
           <div class="p-6">
             <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
-              <img src="assets/headshot/brin.png" alt="Speaker from BRIN" class="speaker-image w-32 h-32" loading="lazy">
+              <img src="assets/headshot/budi-brin.jpg" alt="Speaker from BRIN" class="speaker-image w-32 h-32" loading="lazy">
               <div>
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
-                  [Dr./Researcher Name]
-                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
+                  Prof. Budiman Putra Asmaur Rohman
+                  <a href="https://scholar.google.co.id/citations?hl=en&user=W4HtVZ4AAAAJ&view_op=list_works&authuser=1&sortby=pubdate" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
                     <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5" loading="lazy">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Badan Riset dan Inovasi Nasional (BRIN), Indonesia</p>
-                <p class="text-gray-600">A prominent researcher from BRIN (National Research and Innovation Agency), Indonesia's premier government research institution responsible for coordinating and implementing national research, development, and innovation initiatives. This speaker brings valuable insights from the intersection of telecommunications research and national innovation policy. Their work focuses on strategic technology development, standardization of communication systems, and the implementation of cutting-edge information technology solutions that support Indonesia's digital transformation agenda. With deep expertise in research management and technology transfer, they provide a unique perspective on bridging academic research with national development priorities and industrial applications.</p>
+                <p class="text-gray-600">Dr. Budiman Putra Asmaur Rohman received his B.Eng. degree in Engineering Physics from Institut Teknologi Sepuluh Nopember, Indonesia, in 2009. He earned his M.Eng. in Computer Science and Electrical Engineering and his Ph.D. in Human and Environmental Informatics from Kumamoto University, Japan, in 2018 and 2021, respectively. Since 2015, Dr. Rohman has been with the National Research and Innovation Agency (BRIN), Indonesia. He has also held international research appointments, including as a visiting researcher at Fraunhofer FHR, Germany (2020), and as a researcher at Kumamoto University, Japan (2021–2022). In 2022, he joined the School of Electrical Engineering at Telkom University, Indonesia. His research interests span signal processing, machine learning, radar systems, and embedded systems.
+</p>
               </div>
             </div>
           </div>
@@ -1544,24 +1693,11 @@
               <h3 class="text-2xl font-bold text-violet-700">IEICE TC on IT Contact</h3>
             </div>
             <div class="space-y-3 text-gray-700">
-              <p class="font-semibold">Institute of Electronics, Information and Communication Engineers</p>
               <p class="flex items-start">
                 <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                <a href="mailto:workshop@IEICEonIT.org" class="hover:text-violet-600 transition-colors">[email]@IEICE TC on IT.org</a>
-              </p>
-              <p class="flex items-start">
-                <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                </svg>
-                <span>+81-[phone number]</span>
-              </p>
-              <p class="flex items-start">
-                <svg class="w-5 h-5 mr-2 mt-0.5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                </svg>
-                <a href="https://www.IEICEonIT.org/eng/index.html" target="_blank" class="hover:text-violet-600 transition-colors">www.IEICEEonIT.org</a>
+                <a href="mailto:workshop@IEICEonIT.org" class="hover:text-violet-600 transition-colors">contactus@ieicetconit.org</a>
               </p>
             </div>
           </div>
@@ -1572,28 +1708,14 @@
               <svg class="w-8 h-8 text-emerald-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
-              <h3 class="text-2xl font-bold text-emerald-700">IES-PENS Contact</h3>
+              <h3 class="text-2xl font-bold text-emerald-700">IES Contact</h3>
             </div>
             <div class="space-y-3 text-gray-700">
-              <p class="font-semibold">International Electronics Symposium</p>
-              <p class="font-semibold">Politeknik Elektronika Negeri Surabaya</p>
               <p class="flex items-start">
                 <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
-                <a href="mailto:ies@pens.ac.id" class="hover:text-emerald-600 transition-colors">ies@pens.ac.id</a>
-              </p>
-              <p class="flex items-start">
-                <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                </svg>
-                <span>+62-31-[phone number]</span>
-              </p>
-              <p class="flex items-start">
-                <svg class="w-5 h-5 mr-2 mt-0.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                </svg>
-                <a href="https://ies.pens.ac.id/" target="_blank" class="hover:text-emerald-600 transition-colors">ies.pens.ac.id</a>
+                <a href="mailto:ies@pens.ac.id" class="hover:text-emerald-600 transition-colors">contactus@ies.ac.id</a>
               </p>
             </div>
           </div>
