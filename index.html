@@ -76,11 +76,15 @@
         border-color: rgba(147, 51, 234, 0.3);
       }
       .speaker-image {
+        width: 128px !important;
+        height: 128px !important;
         object-fit: cover;
+        object-position: center;
         border-radius: 50%;
         border: 4px solid transparent;
         background: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
         background-clip: padding-box;
+        flex-shrink: 0;
       }
       
       @keyframes fadeIn {
@@ -1307,8 +1311,8 @@
               <img src="assets/headshot/gede-pens.jpeg" alt="Speaker from PENS" class="speaker-image w-32 h-32" loading="lazy">
               <div>
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
-                  [Professor/Dr. Name]
-                  <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
+                  Prof. Dr. I Gede Puja Astawa
+                  <a href="https://scholar.google.com/citations?user=ligfNzIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
                     <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5" loading="lazy">
                   </a>
                 </h3>
