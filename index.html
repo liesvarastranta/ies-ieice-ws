@@ -41,8 +41,8 @@
         theme: {
           extend: {
             colors: {
-              primary: '#01407e',
-              secondary: '#86ab89',
+              primary: '#f27a46',
+              secondary: '#693897',
             },
             fontFamily: {
               sans: ['Poppins', 'Helvetica', 'Arial', 'Lucida', 'sans-serif'],
@@ -56,7 +56,7 @@
       :root{
         --batik-bg:   #f5f1e8;     /* warm cream cloth (sogan batik base) */
         --batik-ink:  #2c1810;     /* deep brown-black (traditional wax) */
-        --batik-ink2: #01407e;     /* primary blue */
+        --batik-ink2: #f27a46;     /* primary orange */
         --batik-size: 220px;       /* tile size */
       }
       
@@ -93,7 +93,7 @@
         object-position: center;
         border-radius: 50%;
         border: 4px solid transparent;
-        background: linear-gradient(135deg, #01407e 0%, #86ab89 100%);
+        background: linear-gradient(135deg, #f27a46 0%, #693897 100%);
         background-clip: padding-box;
         flex-shrink: 0;
       }
@@ -142,10 +142,10 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(135deg, 
-          rgba(1, 64, 126, 0.85) 0%, 
-          rgba(1, 64, 126, 0.7) 50%,
-          rgba(134, 171, 137, 0.7) 85%,
-          rgba(134, 171, 137, 0.8) 100%);
+          rgba(242, 122, 70, 0.85) 0%, 
+          rgba(242, 122, 70, 0.6) 30%,
+          rgba(46, 53, 128, 0.5) 70%,
+          rgba(46, 53, 128, 0.6) 100%);
         z-index: 0;
       }
       
@@ -174,9 +174,9 @@
         width: 100%;
         height: 100%;
         background: linear-gradient(135deg, 
-          rgba(1, 64, 126, 0.85) 0%, 
-          rgba(1, 64, 126, 0.9) 50%, 
-          rgba(1, 64, 126, 0.88) 100%);
+          rgba(242, 122, 70, 0.85) 0%, 
+          rgba(242, 122, 70, 0.9) 50%, 
+          rgba(229, 106, 54, 0.88) 100%);
         z-index: 0;
       }
       
@@ -352,9 +352,9 @@
         top: 0;
         z-index: 1000;
         background: linear-gradient(135deg, 
-          rgba(1, 64, 126, 0.85) 0%, 
-          rgba(1, 64, 126, 0.7) 85%,
-          rgba(134, 171, 137, 0.8) 100%);
+          rgba(242, 122, 70, 0.85) 0%, 
+          rgba(242, 122, 70, 0.7) 85%,
+          rgba(229, 106, 54, 0.8) 100%);
         backdrop-filter: blur(10px);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
@@ -362,10 +362,10 @@
       
       nav.scrolled {
         background: linear-gradient(135deg, 
-          rgba(1, 64, 126, 0.85) 0%, 
-          rgba(1, 64, 126, 0.7) 85%,
-          /* rgba(134, 171, 137, 0.7) 85%, */
-          rgba(134, 171, 137, 0.8) 100%);
+          rgba(242, 122, 70, 0.85) 0%, 
+          rgba(242, 122, 70, 0.7) 85%,
+          /* rgba(229, 106, 54, 0.7) 85%, */
+          rgba(229, 106, 54, 0.8) 100%);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       }
       
@@ -375,7 +375,7 @@
       }
       
       .nav-link:hover {
-        color: #01407e;
+        color: #2e3580;
       }
       
       .nav-link::after {
@@ -385,7 +385,7 @@
         left: 0;
         width: 0;
         height: 2px;
-        background: linear-gradient(90deg, #01407e, #86ab89);
+        background: linear-gradient(90deg, #f27a46, #693897);
         transition: width 0.3s ease;
       }
       
@@ -410,7 +410,7 @@
           top: 100%;
           left: 0;
           right: 0;
-          background: rgba(1, 64, 126, 0.75);
+          background: #f27a46;
           backdrop-filter: blur(10px);
           padding: 1rem;
           box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -422,7 +422,7 @@
         
         .nav-links a {
           padding: 0.75rem 1rem;
-          border-bottom: 1px solid #e5e7eb;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
       }
 
@@ -526,9 +526,9 @@
             <button id="auth-submit" type="submit" class="px-4 py-2 bg-primary text-white rounded">Enter</button>
             <button id="auth-clear" type="button" class="text-sm text-gray-500">Clear</button>
           </div>
-          <p id="auth-error" class="text-sm text-blue-600" style="color: #01407e hidden mt-2">Invalid credentials. Please try again.</p>
+          <p id="auth-error" class="text-sm text-blue-600" style="color: #f27a46; margin-top: 0.5rem; display: none;">Invalid credentials. Please try again.</p>
         </form>
-        <p class="text-xs text-gray-500 mt-3">Note: This is a client-side gate for convenience. For secure protection, use server-side HTTP Basic Auth (see instructions in page footer).</p>
+        <!-- <p class="text-xs text-gray-500 mt-3">Note: This is a client-side gate for convenience. For secure protection, use server-side HTTP Basic Auth (see instructions in page footer).</p> -->
       </div>
     </div>
 
@@ -548,7 +548,7 @@
 
       function showError(message){
         error.textContent = message || 'Invalid credentials. Please try again.';
-        error.classList.remove('hidden');
+        error.style.display = 'block';
       }
 
       function hideOverlay(){
@@ -690,7 +690,7 @@
           <!-- IEICE TC on IT Logo/Box -->
           <div class="flex-1 max-w-md min-w-[280px]">
             <a href="https://www.ieice.org/eng/index.html" target="_blank" rel="noopener noreferrer" class="block">
-              <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #0E518F 0%, #094073 85%, #023a6f 100%);">
+              <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #f27a46 0%, #e56a36 85%, #d85a26 100%);">
                 <h3 class="text-4xl font-bold mb-4">IEICE TC on IT</h3>
                 <p class="text-lg mb-2">Japan</p>
                 <p class="text-base mt-4 opacity-90">Institute of Electronics, Information and Communication Engineers</p>
@@ -706,7 +706,7 @@
           <!-- IES Logo/Box -->
           <div class="flex-1 max-w-md min-w-[280px]">
             <a href="https://ies.pens.ac.id/2026/" target="_blank" rel="noopener noreferrer" class="block">
-              <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #0E518F 0%, #094073 85%, #023a6f 100%);">
+              <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #f27a46 0%, #e56a36 85%, #d85a26 100%);">
                 <h3 class="text-4xl font-bold mb-4">IES</h3>
                 <p class="text-lg mb-2">Politeknik Elektronika Negeri Surabaya</p>
                 <p class="text-base mt-4 opacity-90">International Electronics Symposium</p>
@@ -722,7 +722,7 @@
           <!-- BRIN Logo/Box -->
           <div class="flex-1 max-w-md min-w-[280px]">
             <a href="https://www.brin.go.id/" target="_blank" rel="noopener noreferrer" class="block">
-              <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #0E518F 0%, #094073 85%, #023a6f 100%);">
+              <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-10 rounded-lg shadow-xl text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer h-full" style="background: linear-gradient(225deg, #f27a46 0%, #e56a36 85%, #d85a26 100%);">
                 <h3 class="text-4xl font-bold mb-4">BRIN</h3>
                 <p class="text-lg mb-2">Indonesia</p>
                 <p class="text-base mt-4 opacity-90">National Research and Innovation Agency</p>
@@ -739,7 +739,7 @@
             </h3>
             <div class="space-y-6 text-black leading-relaxed text-lg md:text-xl">
               <p>
-                  The <span class="font-semibold" style="color: #01407e;">Advancing Information and Telecommunication: Bridging Theory and Application</span>
+                  The <span class="font-semibold" style="color: #f27a46;">Advancing Information and Telecommunication: Bridging Theory and Application</span>
                   workshop is a strategic collaborative initiative between <span class="font-semibold">IEICE TC on IT (Japan)</span>, <span class="font-semibold">IES–PENS</span>, and <span class="font-semibold">BRIN (Indonesia)</span>. 
                   Hosted in Yogyakarta, Indonesia, this event brings together researchers, engineers, and practitioners to strengthen the connection between theoretical
                   innovation and real-world technological solutions in information and telecommunication systems.
@@ -755,7 +755,7 @@
                   next generation of innovators. Students are invited to present their research, share prototypes, and engage in feedback
                   sessions designed to promote international mentorship and collaboration between Japan and Indonesia.
               </p>
-              <p class="italic font-semibold text-center text-xl md:text-2xl" style="color: #01407e;">
+              <p class="italic font-semibold text-center text-xl md:text-2xl" style="color: #f27a46;">
                   Join us in Yogyakarta to bridge theory and application—where ideas evolve into innovation, and future researchers find
                   their voice.
               </p>
@@ -770,7 +770,7 @@
         
         <!-- Countdown Timer -->
         <div class="max-w-4xl mx-auto mb-12">
-          <div class="bg-gradient-to-r from-blue-700 to-blue-900 rounded-2xl shadow-2xl p-8 text-center" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
+          <div class="bg-gradient-to-r from-blue-700 to-blue-900 rounded-2xl shadow-2xl p-8 text-center" style="background: linear-gradient(135deg, #f27a46 0%, #e56a36 100%);">
             <h3 class="text-2xl font-bold text-white mb-6">Workshop Begins In</h3>
             <div class="grid grid-cols-4 gap-4">
               <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
@@ -798,7 +798,7 @@
             <!-- Left: Event Details in 2x2 Grid (50% width) -->
             <div class="grid grid-cols-2 gap-4 h-fit">
             <!-- Date Card -->
-            <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #01407e; background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
+            <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #f27a46; background: linear-gradient(135deg, #f27a46 0%, #e56a36 100%);">
               <div class="flex items-center mb-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff;">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -810,7 +810,7 @@
             </div>
 
             <!-- Location Card -->
-            <div class="bg-gradient-to-br from-green-600 to-green-800 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #86ab89; background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
+            <div class="bg-gradient-to-br from-green-600 to-green-800 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #7CB68E; background: linear-gradient(135deg, #7CB68E 0%, #5da073 100%);">
               <div class="flex items-center mb-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff;">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
@@ -823,7 +823,7 @@
             </div>
 
             <!-- Format Card -->
-            <div class="bg-gradient-to-br from-green-600 to-green-800 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #86ab89; background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
+            <div class="bg-gradient-to-br from-green-600 to-green-800 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #7CB68E; background: linear-gradient(135deg, #7CB68E 0%, #5da073 100%);">
               <div class="flex items-center mb-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff;">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -835,7 +835,7 @@
             </div>
 
             <!-- Registration Card -->
-            <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #01407e; background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
+            <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-4 rounded-xl shadow-lg border hover-parallax" style="border-color: #f27a46; background: linear-gradient(135deg, #f27a46 0%, #e56a36 100%);">
               <div class="flex items-center mb-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #ffffff;">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path>
@@ -862,7 +862,7 @@
                   class="w-full h-full">
                 </iframe>
               </div>
-              <div class="p-4 bg-gradient-to-r from-blue-700 to-blue-900" style="background: linear-gradient(90deg, #01407e 0%, #023a6f 100%);">
+              <div class="p-4 bg-gradient-to-r from-blue-700 to-blue-900" style="background: linear-gradient(90deg, #f27a46 0%, #e56a36 100%);">
                 <h4 class="font-bold text-white text-base mb-1">📍 The Alana Yogyakarta Hotel & Convention Center</h4>
                 <p class="text-white/80 text-xs mb-2">Jl. Palagan Tentara Pelajar No. KM. 7, Yogyakarta, Indonesia</p>
                 <a href="https://www.google.com/maps?q=The+Alana+Yogyakarta+Hotel+%26+Convention+Center" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-semibold text-xs transition-colors text-white hover:text-white/80">
@@ -960,7 +960,7 @@
         </div>
 
         <!-- Quick Travel Tips -->
-        <div class="max-w-6xl mx-auto bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl p-8 shadow-lg" style="background: linear-, #0B529E 0%, #023a6f 100%;">
+        <div class="max-w-6xl mx-auto bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl p-8 shadow-lg" style="background: linear-gradient(135deg, #f27a46 0%, #e56a36 100%);">
           <h3 class="text-2xl font-bold text-white mb-6 text-center">Travel Tips for International Visitors</h3>
           <div class="grid md:grid-cols-3 gap-6 text-sm">
             <div class="flex items-start">
@@ -1000,7 +1000,7 @@
 
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
           <!-- Left Column: IEICE Track Dates -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
             <h3 class="text-xl font-bold mb-4 text-white">IEICE TC on IT Track</h3>
             <table class="w-full text-sm">
               <thead>
@@ -1017,7 +1017,7 @@
           </div>
 
           <!-- Right Column: IES Track Dates -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
             <h3 class="text-xl font-bold mb-4 text-white">IES Track</h3>
             <table class="w-full text-sm">
               <thead>
@@ -1049,8 +1049,8 @@
                 <thead>
                   <tr class="bg-gradient-to-r from-gray-700 to-gray-800">
                     <th class="px-6 py-4 text-left text-white font-semibold">Aspect</th>
-                    <th class="px-6 py-4 text-center text-white font-semibold" style="background: #86ab89;">IEICE Workshop Track</th>
-                    <th class="px-6 py-4 text-center text-white font-semibold" style="background: #01407e;">IES Track</th>
+                    <th class="px-6 py-4 text-center text-white font-semibold" style="background: #693897;">IEICE Workshop Track</th>
+                    <th class="px-6 py-4 text-center text-white font-semibold" style="background: #2e3580;">IES Track</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -1111,8 +1111,8 @@
           <div class="grid md:grid-cols-2 gap-8 mb-10">
             
             <!-- IEICE Track Pros/Cons -->
-            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
-              <div class="text-white p-4 text-center" style="background: #86ab89;">
+            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+              <div class="text-white p-4 text-center" style="background: #693897;">
                 <h3 class="text-2xl font-bold">IEICE Workshop Track</h3>
               </div>
               <div class="p-6">
@@ -1188,8 +1188,8 @@
           </div>
 
             <!-- IES Track Pros/Cons -->
-            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
-              <div class="text-white p-4 text-center" style="background: #01407e;">
+            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+              <div class="text-white p-4 text-center" style="background: #2e3580;">
                 <h3 class="text-2xl font-bold">IES Track</h3>
               </div>
               <div class="p-6">
@@ -1272,8 +1272,8 @@
         
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
           <!-- IEICE Track Submission -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
-            <div class="text-white p-4 text-center" style="background: #86ab89;">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+            <div class="text-white p-4 text-center" style="background: #693897;">
               <h3 class="text-2xl font-bold">IEICE TC on IT Track</h3>
               <p class="text-sm text-white/90">Abstract → Quick Review → Full Manuscript</p>
             </div>
@@ -1308,7 +1308,7 @@
                 
                 <!-- Abstract Submission Button -->
                 <div class="mt-6 pt-4 border-t border-white/20 space-y-3">
-                  <a href="https://forms.google.com/YOUR_FORM_ID_HERE"
+                  <a href="https://forms.gle/vPdKXWCjYgZvLubZ9"
                   target="_blank" rel="noopener noreferrer"
                    class="inline-flex items-center px-4 py-2 text-white rounded-lg transition-colors w-full justify-center font-semibold" style="background: rgba(255,255,255,0.3);" onmouseover="this.style.background='rgba(255,255,255,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1316,13 +1316,12 @@
                     </svg>
                     Submit Abstract (Google Form)
                   </a>
-                  <a href="https://www.ieice.org/jpn_r/transactions/transactions_online/index.html"
+                  <a href="https://ken.ieice.org/ken/program/index.php?tgid=IT"
                   target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center px-4 py-2 text-white rounded-lg transition-colors w-full justify-center" style="background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.5);" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   class="inline-flex items-center px-4 py-2 text-white rounded-lg transition-colors w-full justify-center" style="background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.5);" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                     </svg>
-                    Submit Full Manuscript (IEICE System)
+                    Submit Full Manuscript (soon available in IEICE System)
                   </a>
                   <p class="text-xs text-white/60 text-center">Full manuscript submission available after abstract acceptance</p>
                 </div>
@@ -1331,8 +1330,8 @@
           </div>
 
           <!-- IES Track Submission -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
-            <div class="text-white p-4 text-center" style="background: #01407e;">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+            <div class="text-white p-4 text-center" style="background: #2e3580;">
               <h3 class="text-2xl font-bold">IES Track</h3>
               <p class="text-sm text-white/90 italic">"Cyber-Physical Systems and Society"</p>
             </div>
@@ -1404,7 +1403,7 @@
           <h3 class="text-xl font-bold mb-4 text-gray-800">Formatting Requirements</h3>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 class="font-semibold mb-2" style="color: #86ab89;">IEICE Track</h4>
+              <h4 class="font-semibold mb-2" style="color: #693897;">IEICE Track</h4>
               <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
                 <li>Abstract: 200-300 words</li>
                 <li>Full manuscript: Follow IEICE template</li>
@@ -1413,7 +1412,7 @@
               </ul>
             </div>
             <div>
-              <h4 class="font-semibold mb-2" style="color: #01407e;">IES Track</h4>
+              <h4 class="font-semibold mb-2" style="color: #2e3580;">IES Track</h4>
               <ul class="text-sm text-gray-700 space-y-1 list-disc pl-5">
                 <li>Full paper: 4-6 pages (IEEE format recommended)</li>
                 <li>Language: English</li>
@@ -1425,7 +1424,7 @@
         </div>
 
         <!-- IEICE Student Membership Info -->
-        <div class="max-w-6xl mx-auto bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
+        <div class="max-w-6xl mx-auto bg-gradient-to-br from-green-600 to-green-800 p-6 rounded-xl shadow-lg" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
           <div class="flex items-start">
             <svg class="w-6 h-6 mr-3 mt-1 flex-shrink-0 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -1445,8 +1444,8 @@
 
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-16">
           <!-- IEICE Track Presentation -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
-            <div class="text-white p-4 text-center" style="background: #86ab89;">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+            <div class="text-white p-4 text-center" style="background: #693897;">
               <h3 class="text-2xl font-bold">IEICE Track</h3>
               <p class="text-sm" style="opacity: 0.9;">Presentation Submission (Mandatory)</p>
             </div>
@@ -1496,8 +1495,8 @@
           </div>
 
           <!-- IES Track Presentation -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
-            <div class="text-white p-4 text-center" style="background: #01407e;">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+            <div class="text-white p-4 text-center" style="background: #2e3580;">
               <h3 class="text-2xl font-bold">IES Track</h3>
               <p class="text-sm" style="opacity: 0.9;">Presentation Submission (Recommended)</p>
             </div>
@@ -1660,11 +1659,11 @@
         
         <!-- Advisory Board -->
         <div class="mb-12">
-          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border max-w-md mx-auto" style="border-color: #01407e33;">
-            <h3 class="text-2xl font-bold mb-6 text-center" style="color: #01407e;">Advisory Board</h3>
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border max-w-md mx-auto" style="border-color: #f27a4633;">
+            <h3 class="text-2xl font-bold mb-6 text-center" style="color: #f27a46;">Advisory Board</h3>
             <div class="flex justify-center">
               <div class="flex flex-col items-center">
-                <div class="w-32 h-32 rounded-full overflow-hidden mb-3" style="border: 3px solid #01407e;">
+                <div class="w-32 h-32 rounded-full overflow-hidden mb-3" style="border: 3px solid #f27a46;">
                   <img src="assets/committee/hamka.jpg" alt="Ir. Muhammad Hamka Ibrahim" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Dr. Muhammad Hamka Ibrahim</p>
@@ -1676,25 +1675,25 @@
         
         <div class="grid md:grid-cols-2 gap-8 mb-16">
           <!-- General Chairs -->
-          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border" style="border-color: #01407e33;">
-            <h3 class="text-2xl font-bold mb-6" style="color: #01407e;">General Chairs</h3>
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border" style="border-color: #f27a4633;">
+            <h3 class="text-2xl font-bold mb-6" style="color: #f27a46;">General Chairs</h3>
             <div class="flex gap-6 justify-center">
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden mb-2" style="border: 3px solid #01407e;">
+                <div class="w-24 h-24 rounded-full overflow-hidden mb-2" style="border: 3px solid #f27a46;">
                   <img src="assets/committee/nogami.jpg" alt="Prof. Yasuyuki Nogami" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Prof. Yasuyuki Nogami</p>
                 <p class="text-xs text-gray-600 text-center">Okayama University, IEICE TC on IT, Japan</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/amang.jpg" alt="Prof. Amang Sudarsono" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Prof. Amang Sudarsono</p>
                 <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/nasrullah.jpg" alt="Prof. Nasrullah Armi" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Prof. Nasrullah Armi</p>
@@ -1704,25 +1703,25 @@
           </div>
           
           <!-- Technical Program Chairs -->
-          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #01407e33">
-            <h3 class="text-2xl font-bold text-blue-700" style="color: #01407e mb-6">Technical Program Chairs</h3>
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #f27a4633">
+            <h3 class="text-2xl font-bold text-blue-700" style="color: #f27a46; margin-bottom: 1.5rem;">Technical Program Chairs</h3>
             <div class="flex gap-6 justify-center">
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Dr. [Name]</p>
                 <p class="text-xs text-gray-600 text-center">Okayama University, Japan</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Dr. [Name]</p>
                 <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/agus.jpg" alt="Prof. Agus Subekti" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Prof. Agus Subekti</p>
@@ -1732,25 +1731,25 @@
           </div>
           
           <!-- Organizing Committee -->
-          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #01407e33">
-            <h3 class="text-2xl font-bold text-blue-700" style="color: #01407e mb-6">Organizing Committee</h3>
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #f27a4633">
+            <h3 class="text-2xl font-bold text-blue-700" style="color: #f27a46; margin-bottom: 1.5rem;">Organizing Committee</h3>
             <div class="flex gap-4 justify-center">
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/maya.png" alt="Dr. Maya Rahayu" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Dr. Maya Rahayu</p>
                 <p class="text-xs text-gray-600 text-center">Politeknik Negeri Bandung, Indonesia</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/safira.jpg" alt="Safira Adine Kinari" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Safira Adine Kinari</p>
                 <p class="text-xs text-gray-600 text-center">Okayama University, IEICE TC on IT, Japan</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/galih.jpg" alt="Galih Nugraha Nurkahfi" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Galih Nugraha Nurkahfi</p>
@@ -1760,18 +1759,18 @@
           </div>
           
           <!-- Publication Chairs -->
-          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #01407e33">
-            <h3 class="text-2xl font-bold text-blue-700" style="color: #01407e mb-6">Publication Chairs</h3>
+          <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #f27a4633">
+            <h3 class="text-2xl font-bold text-blue-700" style="color: #f27a46; margin-bottom: 1.5rem;">Publication Chairs</h3>
             <div class="flex gap-6 justify-center">
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/amma.jpg" alt="Amma Liesvarastranta Haz" class="w-full h-full object-cover" loading="lazy">
                 </div>
-                <p class="font-semibold text-center text-sm">Dr. Amma Liesvarastranta Haz</p>
+                <p class="font-semibold text-center text-sm">Amma Liesvarastranta Haz</p>
                 <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
               </div>
               <div class="flex flex-col items-center">
-                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+                <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/naufal.jpeg" alt="Naufal Adi Satrio" class="w-full h-full object-cover" loading="lazy">
                 </div>
                 <p class="font-semibold text-center text-sm">Naufal Adi Satrio</p>
@@ -1782,11 +1781,11 @@
         </div>
         
         <!-- Technical Program Committee -->
-        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #01407e33">
-          <h3 class="text-2xl font-bold text-blue-700" style="color: #01407e mb-6">Technical Program Committee</h3>
+        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #f27a4633">
+          <h3 class="text-2xl font-bold text-blue-700" style="color: #f27a46; margin-bottom: 1.5rem;">Technical Program Committee</h3>
           <div class="grid md:grid-cols-5 gap-6">
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/committee/shamim.jpeg" alt="Shamim Sardar" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">Shamim Sardar</p>
@@ -1795,35 +1794,35 @@
               <p class="text-xs text-gray-500 text-center italic">Network Security, ML, LLM</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Indonesia</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Indonesia</p>
             </div>
             <div class="flex flex-col items-center">
-              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #01407e mb-2">
+              <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
@@ -1844,12 +1843,12 @@
         <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-3 gap-6 mb-16">
           <!-- Visa Free Entry Card -->
-          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #01407e33;">
+          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #f27a4633;">
             <div class="flex items-center mb-4">
-              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #01407e;">
+              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #f27a46;">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <h3 class="text-xl font-bold" style="color: #01407e;">Visa-Free Entry</h3>
+              <h3 class="text-xl font-bold" style="color: #f27a46;">Visa-Free Entry</h3>
             </div>
             <p class="text-sm text-gray-600 mb-4">
               Citizens of <strong>17 countries/regions</strong> can enter Indonesia visa-free for up to <strong>30 days</strong> (non-extendable).
@@ -1863,19 +1862,19 @@
                 <strong>Middle East:</strong> Türkiye<br>
                 <em class="text-gray-500">+ Singapore Permanent Residents via specific checkpoints</em>
               </p>
-              <a href="https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-bebas-visa-kunjungan" target="_blank" rel="noopener noreferrer" class="font-semibold mt-2 inline-block" style="color: #01407e;" onmouseover="this.style.color='#023a6f'" onmouseout="this.style.color='#01407e'">
+              <a href="https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-bebas-visa-kunjungan" target="_blank" rel="noopener noreferrer" class="font-semibold mt-2 inline-block" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">
                 Official immigration website →
               </a>
             </div>
           </div>
 
           <!-- Visa on Arrival Card -->
-          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #01407e33;">
+          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #f27a4633;">
             <div class="flex items-center mb-4">
-              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #01407e;">
+              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #f27a46;">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <h3 class="text-xl font-bold" style="color: #01407e;">Visa on Arrival</h3>
+              <h3 class="text-xl font-bold" style="color: #f27a46;">Visa on Arrival</h3>
             </div>
             <p class="text-sm text-gray-600 mb-4">
               Available for <strong>97 countries</strong> at major Indonesian airports including Yogyakarta.
@@ -1890,7 +1889,7 @@
                 <p class="text-gray-600 leading-relaxed">USA, UK, Japan, South Korea, China, Australia, Canada, Germany, France, Italy, Spain, India, Russia, UAE, and many more.</p>
               </div>
               <div class="border-t pt-2">
-                <a href="https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-subjek-visa-on-arrival" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: #01407e;" onmouseover="this.style.color='#023a6f'" onmouseout="this.style.color='#01407e'">
+                <a href="https://www.imigrasi.go.id/wna/daftar-negara-voa-bvk-calling-visa/daftar-negara-subjek-visa-on-arrival" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">
                   View complete list →
                 </a>
               </div>
@@ -1898,12 +1897,12 @@
           </div>
 
           <!-- E-Visa Card -->
-          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #01407e33;">
+          <div class="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border p-6" style="border-color: #f27a4633;">
             <div class="flex items-center mb-4">
-              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #01407e;">
+              <svg class="w-10 h-10 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: #f27a46;">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
               </svg>
-              <h3 class="text-xl font-bold" style="color: #01407e;">E-Visa</h3>
+              <h3 class="text-xl font-bold" style="color: #f27a46;">E-Visa</h3>
             </div>
             <p class="text-sm text-gray-600 mb-4">
               Apply online before travel through Indonesia's official e-Visa system.
@@ -1914,7 +1913,7 @@
                 <p class="text-gray-600">Recommended for longer stays or business purposes</p>
               </div>
               <div class="border-t pt-2">
-                <a href="https://evisa.imigrasi.go.id/" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: #01407e;" onmouseover="this.style.color='#023a6f'" onmouseout="this.style.color='#01407e'">
+                <a href="https://evisa.imigrasi.go.id/" target="_blank" rel="noopener noreferrer" class="font-semibold" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">
                   Apply online →
                 </a>
               </div>
@@ -1924,56 +1923,56 @@
 
         <!-- Requirements & Important Notes -->
         <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 mb-6">
-          <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center" style="color: #01407e;">General Requirements</h3>
+          <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center" style="color: #f27a46;">General Requirements</h3>
           <div class="grid md:grid-cols-2 gap-6">
             <div>
               <h4 class="font-bold text-gray-800 mb-3 flex items-center">
-                <svg class="w-5 h-5 text-blue-600" style="color: #01407e mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-orange-600" style="color: #f27a46 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                 </svg>
                 All Visitors Must Have:
               </h4>
               <ul class="space-y-2 text-sm text-gray-600">
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Passport valid for at least <strong>6 months</strong> from entry date</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Return or onward flight ticket</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Proof of accommodation (hotel booking)</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Sufficient funds for duration of stay</span>
                 </li>
               </ul>
             </div>
             <div>
               <h4 class="font-bold text-gray-800 mb-3 flex items-center">
-                <svg class="w-5 h-5 text-blue-600" style="color: #01407e mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-orange-600" style="color: #f27a46 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                 </svg>
                 Important Notes:
               </h4>
               <ul class="space-y-2 text-sm text-gray-600">
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Visa-free entry is <strong>NOT extendable</strong></span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Check latest requirements before travel</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46 mr-2">•</span>
                   <span>Health insurance recommended</span>
                 </li>
                 <li class="flex items-start">
-                  <span class="text-blue-600" style="color: #01407e mr-2">•</span>
+                  <span class="text-blue-600" style="color: #f27a46; margin-right: 0.5rem;">•</span>
                   <span>Check Indonesia's customs regulations</span>
                 </li>
               </ul>
@@ -1982,16 +1981,16 @@
         </div>
 
         <!-- Contact for Visa Assistance -->
-        <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border text-center" style="border-color: #01407e33;">
-          <h4 class="text-xl font-bold mb-3" style="color: #01407e;">Need Visa Assistance?</h4>
+        <div class="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border text-center" style="border-color: #f27a4633;">
+          <h4 class="text-xl font-bold mb-3" style="color: #f27a46;">Need Visa Assistance?</h4>
           <p class="mb-4 text-gray-600">
             Our organizing committee can provide invitation letters for visa applications if required.
           </p>
           <div class="flex flex-wrap justify-center gap-4">
-            <a href="#contact" class="px-6 py-2 rounded-lg font-semibold transition-colors text-white" style="background: #01407e;" onmouseover="this.style.background='#023a6f'" onmouseout="this.style.background='#01407e'">
+            <a href="#contact" class="px-6 py-2 rounded-lg font-semibold transition-colors text-white" style="background: #f27a46;" onmouseover="this.style.background='#e56a36'" onmouseout="this.style.background='#f27a46'">
               Contact Us
             </a>
-            <a href="https://www.imigrasi.go.id" target="_blank" class="px-6 py-2 rounded-lg font-semibold transition-colors border" style="color: #01407e; border-color: #01407e;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='transparent'">
+            <a href="https://www.imigrasi.go.id" target="_blank" class="px-6 py-2 rounded-lg font-semibold transition-colors border" style="color: #f27a46; border-color: #f27a46;" onmouseover="this.style.background='#fff5f0'" onmouseout="this.style.background='transparent'">
               Official Immigration Website
             </a>
           </div>
@@ -2005,8 +2004,8 @@
         
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
           <!-- IEICE TC on IT Contact -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #86ab89 0%, #6d8f70 100%);">
-            <div class="text-white p-4 text-center" style="background: #86ab89;">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+            <div class="text-white p-4 text-center" style="background: #693897;">
               <h3 class="text-2xl font-bold">IEICE TC on IT Contact</h3>
             </div>
             <div class="p-6">
@@ -2025,15 +2024,15 @@
           </div>
           
           <!-- IES Contact -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #01407e 0%, #023a6f 100%);">
-            <div class="text-white p-4 text-center" style="background: #01407e;">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+            <div class="text-white p-4 text-center" style="background: #2e3580;">
               <h3 class="text-2xl font-bold">IES Contact</h3>
             </div>
             <div class="p-6">
               <div class="space-y-4">
                 <div class="flex items-center">
                   <svg class="w-8 h-8 mr-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                   </svg>
                   <div>
                     <p class="text-sm text-white/80 mb-1">Email</p>
@@ -2051,7 +2050,7 @@
           <p class="text-gray-700 text-center">
             For questions about paper submissions, registration, or general workshop information, 
             please contact the organizing committee at: 
-            <a href="mailto:ies@pens.ac.id" class="font-semibold transition-colors" style="color: #01407e;" onmouseover="this.style.color='#012d5a'" onmouseout="this.style.color='#01407e'">ies@pens.ac.id</a>
+            <a href="mailto:ies@pens.ac.id" class="font-semibold transition-colors" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">ies@pens.ac.id</a>
           </p>
         </div>
       </section>
