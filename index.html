@@ -514,86 +514,6 @@
     </style>
   </head>
   <body>
-    <!-- Simple client-side login overlay (plaintext credentials - not secure for production) -->
-    <div id="auth-overlay" class="fixed inset-0 bg-white/95 z-[9999] flex items-center justify-center p-6">
-      <div class="max-w-md w-full bg-white rounded-xl shadow-xl p-6">
-        <h2 class="text-2xl font-bold mb-2 text-gray-800">Site Login</h2>
-        <p class="text-sm text-gray-600 mb-4">Enter ID and password to view this site.</p>
-        <form id="auth-form" class="space-y-4">
-          <input id="auth-id" class="w-full p-2 border rounded" placeholder="ID" aria-label="ID" required />
-          <input id="auth-pw" type="password" class="w-full p-2 border rounded" placeholder="Password" aria-label="Password" required />
-          <div class="flex items-center justify-between">
-            <button id="auth-submit" type="submit" class="px-4 py-2 bg-primary text-white rounded">Enter</button>
-            <button id="auth-clear" type="button" class="text-sm text-gray-500">Clear</button>
-          </div>
-          <p id="auth-error" class="text-sm text-blue-600" style="color: #f27a46; margin-top: 0.5rem; display: none;">Invalid credentials. Please try again.</p>
-        </form>
-        <!-- <p class="text-xs text-gray-500 mt-3">Note: This is a client-side gate for convenience. For secure protection, use server-side HTTP Basic Auth (see instructions in page footer).</p> -->
-      </div>
-    </div>
-
-    <script>
-      // === Client-side auth settings (edit these values) ===
-      // WARNING: These values are visible to anyone with access to the site files.
-      const AUTH_ID = 'admin';
-      const AUTH_PW = 'ieice2026';
-
-      // Quick helpers
-      const overlay = document.getElementById('auth-overlay');
-      const form = document.getElementById('auth-form');
-      const inputId = document.getElementById('auth-id');
-      const inputPw = document.getElementById('auth-pw');
-      const error = document.getElementById('auth-error');
-      const clearBtn = document.getElementById('auth-clear');
-
-      function showError(message){
-        error.textContent = message || 'Invalid credentials. Please try again.';
-        error.style.display = 'block';
-      }
-
-      function hideOverlay(){
-        if(overlay) overlay.style.display = 'none';
-      }
-
-      function checkStored(){
-        try{
-          if(sessionStorage.getItem('site_auth') === '1'){
-            hideOverlay();
-            return true;
-          }
-        }catch(e){/* ignore */}
-        return false;
-      }
-
-      // Initialize: if already logged in for this tab, hide overlay
-      document.addEventListener('DOMContentLoaded', ()=>{
-        if(checkStored()) return;
-        // focus first field
-        inputId.focus();
-      });
-
-      // Form submit handler
-      form.addEventListener('submit', function(e){
-        e.preventDefault();
-        const id = inputId.value.trim();
-        const pw = inputPw.value;
-        if(id === AUTH_ID && pw === AUTH_PW){
-          try{ sessionStorage.setItem('site_auth','1'); }catch(e){}
-          hideOverlay();
-        }else{
-          showError('Invalid ID or password.');
-          inputPw.value = '';
-          inputPw.focus();
-        }
-      });
-
-      clearBtn.addEventListener('click', ()=>{
-        inputId.value = '';
-        inputPw.value = '';
-        error.classList.add('hidden');
-        inputId.focus();
-      });
-    </script>
     <!-- Navigation Bar -->
     <nav id="navbar" class="py-3">
       <div class="section-container">
@@ -819,7 +739,7 @@
                 <h3 class="text-base font-bold text-white">Location</h3>
               </div>
               <p class="text-lg font-bold text-white">Yogyakarta, Indonesia</p>
-              <p class="text-xs text-white/80 mt-1">The Alana Yogyakarta Hotel & Convention Center</p>
+              <p class="text-xs text-white/80 mt-1">Sahid Raya Yogyakarta Hotel & Convention Yogyakarta</p>
             </div>
 
             <!-- Format Card -->
@@ -852,7 +772,7 @@
             <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 sticky top-24 h-fit">
               <div class="h-[110px] w-full">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.2799999999997!2d110.37498!3d-7.7393398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a58e23d58705d%3A0xe3e3f1de06133d33!2sThe%20Alana%20Yogyakarta%20Hotel%20%26%20Convention%20Center!5e0!3m2!1sen!2sid!4v1734249600000!5m2!1sen!2sid"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.526!2d110.4114049!3d-7.7797967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5788a7536bf3%3A0x2ad64bfe394b9c11!2sSahid%20Raya%20Yogyakarta%20Hotel%20%26%20Convention%20Yogyakarta!5e0!3m2!1sen!2sid!4v1738773600000!5m2!1sen!2sid"
                   width="100%" 
                   height="100%" 
                   style="border:0;" 
@@ -863,9 +783,9 @@
                 </iframe>
               </div>
               <div class="p-4 bg-gradient-to-r from-blue-700 to-blue-900" style="background: linear-gradient(90deg, #f27a46 0%, #e56a36 100%);">
-                <h4 class="font-bold text-white text-base mb-1">📍 The Alana Yogyakarta Hotel & Convention Center</h4>
-                <p class="text-white/80 text-xs mb-2">Jl. Palagan Tentara Pelajar No. KM. 7, Yogyakarta, Indonesia</p>
-                <a href="https://www.google.com/maps?q=The+Alana+Yogyakarta+Hotel+%26+Convention+Center" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-semibold text-xs transition-colors text-white hover:text-white/80">
+                <h4 class="font-bold text-white text-base mb-1">📍 Sahid Raya Yogyakarta Hotel & Convention Yogyakarta</h4>
+                <p class="text-white/80 text-xs mb-2">Jl. Magelang No.Km 6, Yogyakarta, Indonesia</p>
+                <a href="https://maps.app.goo.gl/SuWghPAhMJtzTjmf6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center font-semibold text-xs transition-colors text-white hover:text-white/80">
                   <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                   </svg>
@@ -1079,7 +999,7 @@
                   </tr>
                   <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4 font-semibold text-gray-700">Paper Deadline</td>
-                    <td class="px-6 py-4 text-center bg-green-50">TBA (After acceptance)</td>
+                    <td class="px-6 py-4 text-center bg-green-50">TBA</td>
                     <td class="px-6 py-4 text-center bg-blue-50"><strong>April 5, 2026</strong></td>
                   </tr>
                   <tr class="hover:bg-gray-50">
@@ -1111,7 +1031,7 @@
           <div class="grid md:grid-cols-2 gap-8 mb-10">
             
             <!-- IEICE Track Pros/Cons -->
-            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #8c5db8 0%, #502a6e 100%);">
               <div class="text-white p-4 text-center" style="background: #693897;">
                 <h3 class="text-2xl font-bold">IEICE Workshop Track</h3>
               </div>
@@ -1159,7 +1079,7 @@
                   <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                   </svg>
-                  Disadvantages
+                  Remarks
                 </h4>
                 <ul class="space-y-2 text-sm text-white/80">
                   <li class="flex items-start">
@@ -1188,7 +1108,7 @@
           </div>
 
             <!-- IES Track Pros/Cons -->
-            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+            <div class="rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #424a9b 0%, #252967 100%);">
               <div class="text-white p-4 text-center" style="background: #2e3580;">
                 <h3 class="text-2xl font-bold">IES Track</h3>
               </div>
@@ -1236,7 +1156,7 @@
                   <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                   </svg>
-                  Disadvantages
+                  Remarks
                 </h4>
                 <ul class="space-y-2 text-sm text-white/80">
                   <li class="flex items-start">
@@ -1272,7 +1192,7 @@
         
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
           <!-- IEICE Track Submission -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #8c5db8 0%, #502a6e 100%);">
             <div class="text-white p-4 text-center" style="background: #693897;">
               <h3 class="text-2xl font-bold">IEICE TC on IT Track</h3>
               <p class="text-sm text-white/90">Abstract → Quick Review → Full Manuscript</p>
@@ -1330,7 +1250,7 @@
           </div>
 
           <!-- IES Track Submission -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #424a9b 0%, #252967 100%);">
             <div class="text-white p-4 text-center" style="background: #2e3580;">
               <h3 class="text-2xl font-bold">IES Track</h3>
               <p class="text-sm text-white/90 italic">"Cyber-Physical Systems and Society"</p>
@@ -1615,14 +1535,14 @@
               <img src="assets/headshot/gede-pens.jpeg" alt="Speaker from PENS" class="speaker-image w-32 h-32" loading="lazy">
               <div>
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
-                  Prof. Dr. I Gede Puja Astawa
+                  Prof. I Gede Puja Astawa
                   <a href="https://scholar.google.com/citations?user=ligfNzIAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
                     <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5" loading="lazy">
                   </a>
                 </h3>
                 <p class="text-lg italic mb-3 text-secondary">Politeknik Elektronika Negeri Surabaya (PENS), Indonesia</p>
                 <p class="text-sm font-semibold text-gray-600 mb-2">Presentation Topic: <span class="text-yellow-600">TBA</span></p>
-                <p class="text-gray-600">Prof. Dr. Ir. I Gede Puja Astawa received his B.S. and M.S. degrees from Institut Teknologi Sepuluh Nopember Surabaya (ITS), Indonesia in 1993 and 2006,respectively. He received his Ph.D. degree from the Nara Institute of Science and Technology (NAIST), Japan, in 2012. He is currently with the Politeknik Elektronika Negeri Surabaya (PENS), where he serves as a Professor in the Department of Electrical Engineering. His research interests in wireless communications, signal processing include OFDM and MIMO systems, physical-layer security, peak-to-average power ratio (PAPR) reduction techniques, and real-time experimental validation using SDR platforms.</p>
+                <p class="text-gray-600">Prof. I Gede Puja Astawa received his B.S. and M.S. degrees from Institut Teknologi Sepuluh Nopember Surabaya (ITS), Indonesia in 1993 and 2006,respectively. He received his Ph.D. degree from the Nara Institute of Science and Technology (NAIST), Japan, in 2012. He is currently with the Politeknik Elektronika Negeri Surabaya (PENS), where he serves as a Professor in the Department of Electrical Engineering. His research interests in wireless communications, signal processing include OFDM and MIMO systems, physical-layer security, peak-to-average power ratio (PAPR) reduction techniques, and real-time experimental validation using SDR platforms.</p>
               </div>
             </div>
           </div>
@@ -1635,7 +1555,7 @@
               <img src="assets/headshot/budi-brin.jpg" alt="Speaker from BRIN" class="speaker-image w-32 h-32" loading="lazy">
               <div>
                 <h3 class="text-2xl font-bold text-gray-800 flex items-center flex-wrap gap-2">
-                  Prof. Budiman Putra Asmaur Rohman
+                  Dr. Budiman Putra Asmaur Rohman
                   <a href="https://scholar.google.co.id/citations?hl=en&user=W4HtVZ4AAAAJ&view_op=list_works&authuser=1&sortby=pubdate" target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:opacity-80 transition-opacity" title="Google Scholar Profile">
                     <img src="assets/logo/Google_Scholar_logo.svg" alt="Google Scholar" class="w-5 h-5" loading="lazy">
                   </a>
@@ -1706,7 +1626,7 @@
           <div class="bg-white/90 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-200" style="border-color: #f27a4633">
             <h3 class="text-2xl font-bold text-blue-700" style="color: #f27a46; margin-bottom: 1.5rem;">Technical Program Chairs</h3>
             <div class="flex gap-6 justify-center">
-              <div class="flex flex-col items-center">
+              <!-- <div class="flex flex-col items-center">
                 <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/headshot/placeholder.jpg" alt="Dr. [Name]" class="w-full h-full object-cover" loading="lazy">
                 </div>
@@ -1719,7 +1639,7 @@
                 </div>
                 <p class="font-semibold text-center text-sm">Dr. [Name]</p>
                 <p class="text-xs text-gray-600 text-center">Politeknik Elektronika Negeri Surabaya, Indonesia</p>
-              </div>
+              </div> -->
               <div class="flex flex-col items-center">
                 <div class="w-24 h-24 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                   <img src="assets/committee/agus.jpg" alt="Prof. Agus Subekti" class="w-full h-full object-cover" loading="lazy">
@@ -1793,7 +1713,7 @@
               <p class="text-xs text-gray-600 text-center">岡山大学</p>
               <p class="text-xs text-gray-500 text-center italic">Network Security, ML, LLM</p>
             </div>
-            <div class="flex flex-col items-center">
+            <!-- <div class="flex flex-col items-center">
               <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
@@ -1820,14 +1740,14 @@
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Indonesia</p>
-            </div>
-            <div class="flex flex-col items-center">
+            </div> -->
+            <!-- <div class="flex flex-col items-center">
               <div class="w-20 h-20 rounded-full overflow-hidden border-3 border-blue-600" style="border-color: #f27a46; margin-bottom: 0.5rem;">
                 <img src="assets/headshot/placeholder.jpg" alt="[Name]" class="w-full h-full object-cover" loading="lazy">
               </div>
               <p class="font-semibold text-center text-xs">[Name]</p>
               <p class="text-xs text-gray-600 text-center">[Institution], Japan</p>
-            </div>
+            </div> -->
           </div>
         </div>
         </div>
@@ -2004,8 +1924,8 @@
         
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
           <!-- IEICE TC on IT Contact -->
-          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #693897 0%, #502a6e 100%);">
-            <div class="text-white p-4 text-center" style="background: #693897;">
+          <div class="bg-gradient-to-br from-green-600 to-green-800 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #8c5db8 0%, #502a6e 100%);">
+            <div class="text-white p-4 text-center" style="background: #8c5db8;">
               <h3 class="text-2xl font-bold">IEICE TC on IT Contact</h3>
             </div>
             <div class="p-6">
@@ -2016,7 +1936,7 @@
                   </svg>
                   <div>
                     <p class="text-sm text-white/80 mb-1">Email</p>
-                    <a href="mailto:ies@pens.ac.id" class="text-white font-semibold text-lg transition-colors" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">ies@pens.ac.id</a>
+                    <a href="mailto:it-sec@mail.ieice.org" class="text-white font-semibold text-lg transition-colors" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">it-sec@mail.ieice.org</a>
                   </div>
                 </div>
               </div>
@@ -2024,8 +1944,8 @@
           </div>
           
           <!-- IES Contact -->
-          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #2e3580 0%, #252967 100%);">
-            <div class="text-white p-4 text-center" style="background: #2e3580;">
+          <div class="bg-gradient-to-br from-blue-700 to-blue-900 rounded-xl shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #424a9b 0%, #252967 100%);">
+            <div class="text-white p-4 text-center" style="background: #424a9b;">
               <h3 class="text-2xl font-bold">IES Contact</h3>
             </div>
             <div class="p-6">
@@ -2050,7 +1970,7 @@
           <p class="text-gray-700 text-center">
             For questions about paper submissions, registration, or general workshop information, 
             please contact the organizing committee at: 
-            <a href="mailto:ies@pens.ac.id" class="font-semibold transition-colors" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">ies@pens.ac.id</a>
+            <a href="mailto:it-sec@mail.ieice.org" class="font-semibold transition-colors" style="color: #f27a46;" onmouseover="this.style.color='#e56a36'" onmouseout="this.style.color='#f27a46'">it-sec@mail.ieice.org</a>
           </p>
         </div>
       </section>
